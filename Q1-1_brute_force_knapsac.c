@@ -19,15 +19,15 @@ struct knapsac
 } sac[50];
 
 int no_items;
-int capacity;
+int sac_capacity;
 void create(char *);
 
 int main()
 {
-	printf("Hello\n");
 	char file_name[50];
 	strcpy(file_name, "input.txt");
 	create(file_name);
+
 	return 0;
 }
 
@@ -37,7 +37,7 @@ void create(char *file_name)
 	int i = 0;
 	//Open file in read mode
 	fp = fopen(file_name, "r");
-	char buffer[250],a[50];
+	char buffer[250], a[50];
 	char *token;
 
 	if (fp == NULL)
@@ -68,9 +68,14 @@ void create(char *file_name)
 		while (token != NULL)
 		{
 			sac[i].profit = atoi(token);
-			printf(" : %d\n", sac[i].profit);
+			printf(" > %d\n", sac[i].profit);
 			i++;
 			token = strtok(NULL, ",");
+		}
+		if (fscanf(fp, "%s", a) == 1)
+		{
+			sac_capacity = atoi(a);
+			printf("Total sac capacity : %d \n", sac_capacity);
 		}
 	}
 	fclose(fp);
